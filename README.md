@@ -1,5 +1,5 @@
 # Palette-Testing
-Just started working with palette. It will progress to loading multiple images in a gridview
+Just started working with palette. I am currently loading images from URL's. Adding the images to a recyclerView
 
 **What I have so far**
 
