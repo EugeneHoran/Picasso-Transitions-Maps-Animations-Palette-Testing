@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <!--  Error with
+               app:layout_scrollFlags="scroll|enterAlways"
+
+                Once fixed with the Design Support Library I will add this
+                -->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="#eee"
+                app:navigationIcon="@mipmap/ic_menu_black_24dp"
+                app:title="United States"
+                app:titleMarginStart="16dp" />
+
+        </android.support.design.widget.AppBarLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@mipmap/ic_search_white_24dp"
+        app:backgroundTint="#2196F3"
+        app:borderWidth="0dp"
+        app:elevation="4sp" />
+
+</RelativeLayout>

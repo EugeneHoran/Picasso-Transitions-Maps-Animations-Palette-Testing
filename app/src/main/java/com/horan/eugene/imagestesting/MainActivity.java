@@ -1,72 +1,102 @@
 package com.horan.eugene.imagestesting;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.InputStream;
-import java.net.URL;
+import android.view.MenuItem;
 
 
-public class MainActivity extends AppCompatActivity {
-    ImageView img;
-    Bitmap bitmap;
-    Toolbar toolbar;
+public class MainActivity extends AppCompatActivity implements FragmentUS.FragmentCallbacks {
+    private DrawerLayout mNavigationDrawer;
+
+    private Fragment fragment;
+    private static String FRAGMENT_TAG = "";
+
+    public static final String NAV_ITEM_ID = "navItemId";
+    private int mNavItemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Whats Up Palette");
-        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
-        new LoadImage().execute("http://www.wallpaperwidgets.com/static/images/Blue-Green-beautiful-nature-21891805-1920-1200_qYT8wm6.jpg");
-        img = (ImageView) findViewById(R.id.img);
+        if (savedInstanceState != null) {
+            mNavItemId = savedInstanceState.getInt(NAV_ITEM_ID);
+        } else {
+            mNavItemId = R.id.nav_us;
+            switchFragment(mNavItemId);
+        }
+        mNavigationDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        NavigationView mNavigationView = (NavigationView) findViewById(R.id.nav);
+        mNavigationView.inflateMenu(R.menu.nav_menu);
+        mNavigationView.getMenu().findItem(mNavItemId).setChecked(true);
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                mNavItemId = menuItem.getItemId();
+                switchFragment(menuItem.getItemId());
+                menuItem.setChecked(true);
+                handleNavigationDrawer();
+                return false;
+            }
+        });
     }
 
-    private class LoadImage extends AsyncTask<String, String, Bitmap> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
+    @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(NAV_ITEM_ID, mNavItemId);
+    }
 
+    /**
+     * Handles Navigation Logic
+     */
+    private void switchFragment(int menuId) {
+        switch (menuId) {
+            case R.id.nav_us:
+                fragment = new FragmentUS();
+                FRAGMENT_TAG = "US";
+                break;
+            case R.id.nav_other:
 
+                break;
+
+            default:
+                break;
         }
-
-        protected Bitmap doInBackground(String... args) {
-            try {
-                bitmap = BitmapFactory.decodeStream((InputStream) new URL(args[0]).getContent());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return bitmap;
+        if (fragment != null && fragment != getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG)) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment, FRAGMENT_TAG).commit();
         }
+    }
 
-        protected void onPostExecute(Bitmap image) {
-            if (image != null) {
-                img.setImageBitmap(image);
-                Palette palette = Palette.from(bitmap).generate();
-                Palette.Swatch swatch = palette.getVibrantSwatch();
-                int bodyTextColor = swatch.getBodyTextColor();
-                int titleTextColor = swatch.getTitleTextColor();
-                int rgbColor = swatch.getRgb();
-                CardView root = (CardView) findViewById(R.id.card);
-                TextView text = (TextView) findViewById(R.id.text);
-                TextView body = (TextView) findViewById(R.id.body);
-                root.setCardBackgroundColor(rgbColor);
-                text.setTextColor(bodyTextColor);
-                body.setTextColor(titleTextColor);
+    @Override
+    public void onBackPressed() {
+        if (mNavigationDrawer.isDrawerOpen(GravityCompat.START)) {
+            mNavigationDrawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    /**
+     * Used to handle the closing and opening of the Navigation Drawer.
+     * Prevent repetitive statements
+     */
+    private void handleNavigationDrawer() {
+        if (mNavigationDrawer != null) {
+            if (mNavigationDrawer.isDrawerOpen(GravityCompat.START)) {
+                mNavigationDrawer.closeDrawer(GravityCompat.START);
             } else {
-                Toast.makeText(MainActivity.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+                mNavigationDrawer.openDrawer(GravityCompat.START);
             }
         }
+    }
+
+    @Override
+    public void openNavigationDrawer() {
+        handleNavigationDrawer();
     }
 }
