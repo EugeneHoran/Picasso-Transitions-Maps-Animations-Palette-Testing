@@ -1,6 +1,12 @@
 # Palette-Testing
 Just started working with palette. I am currently loading images from URL's. Adding the images to a recyclerView
 
+
+** UPDATE**  I was pretty bored today so I decided to add maps and some other cool animations to the app.  Video below
+
+https://youtu.be/ehjTjtfVSGg
+
+
 Here is a short clip of the latest update. 
 
 https://youtu.be/PIEI9-NA5G0
