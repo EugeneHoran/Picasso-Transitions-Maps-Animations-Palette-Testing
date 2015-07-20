@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.horan.eugene.imagestesting.DetailsActivity">
+    <item
+        android:id="@+id/action_satellite"
+        android:icon="@mipmap/ic_satellite_white_24dp"
+        android:orderInCategory="100"
+        android:title="Satellite"
+        app:showAsAction="always" />
+</menu>

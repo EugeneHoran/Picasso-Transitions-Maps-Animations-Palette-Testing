@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.horan.eugene.imagestesting.DetailsActivity">
+    <item
+        android:id="@+id/action_map"
+        android:icon="@mipmap/ic_map_white_24dp"
+        android:orderInCategory="100"
+        android:title="Normal"
+        app:showAsAction="always" />
+</menu>

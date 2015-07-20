@@ -3,7 +3,8 @@
     android:id="@+id/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9E9E9E">
+    android:background="#9E9E9E"
+    android:clickable="true">
 
     <ImageView
         android:id="@+id/imageError"
@@ -19,11 +20,13 @@
         android:layout_centerInParent="true"
         android:indeterminate="true" />
 
+
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:transitionName="cardImage" />
 
     <LinearLayout
         android:id="@+id/txtBack"
@@ -35,22 +38,24 @@
         android:paddingBottom="8dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+        android:transitionName="back">
 
         <TextView
-            android:id="@+id/txtItem"
+            android:id="@+id/txtDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textColor="#fff"
+            android:textColor="#FFF"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:transitionName="title" />
 
         <TextView
-            android:id="@+id/txtTitle"
+            android:id="@+id/txtLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
+            android:textColor="#EEE"
             android:textSize="12sp" />
 
     </LinearLayout>
